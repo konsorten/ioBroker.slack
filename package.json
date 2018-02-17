@@ -1,0 +1,41 @@
+{
+  "name": "ioBroker.slack",
+  "version": "0.6.0",
+  "description": "ioBroker slack Adapter",
+  "author": {
+    "name": "marvin + konsorten GmbH",
+    "email": "dev@konsorten.de"
+  },
+  "contributors": [
+    {
+      "name": "marvin + konsorten GmbH",
+      "email": "dev@konsorten.de"
+    }
+  ],
+  "homepage": "https://github.com/ioBroker/ioBroker.slack",
+  "license": "MIT",
+  "keywords": [
+    "ioBroker",
+    "slack",
+    "Smart Home",
+    "home automation"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ioBroker/ioBroker.slack"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "mocha": "^4.1.0",
+    "chai": "^4.1.2"
+  },
+  "main": "main.js",
+  "scripts": {
+    "test": "node node_modules/mocha/bin/mocha --exit"
+  },
+  "bugs": {
+    "url": "https://github.com/ioBroker/ioBroker.slack/issues"
+  },
+  "readmeFilename": "README.md"
+}
