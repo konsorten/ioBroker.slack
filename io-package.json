@@ -30,7 +30,7 @@
                 "nl": "Eerste release"
             }
         },
-        "title": "Javascript/Node.js based slack adapter",
+		"title": "Javascript/Node.js based slack adapter",
         "titleLang": {
             "en": "Javascript/Node.js based slack adapter",
             "de": "Javascript / Node.js basierte Vorlagenadapter",
@@ -70,24 +70,18 @@
         "materialize": true,
         "enabled": true,
         "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.slack/master/admin/slack.png",
-        "keywords": [
-            "slack",
-            "vis",
-            "GUI",
-            "graphical",
-            "scada"
-        ],
+        "keywords": ["slack", "vis", "GUI", "graphical", "scada"],
         "readme": "https://github.com/ioBroker/ioBroker.slack/blob/master/README.md",
         "loglevel": "info",
         "type": "general",
-        "restartAdapters": [
-            "vis"
-        ]
+        "restartAdapters": ["vis"]
     },
     "native": {
         "test1": true,
         "test2": 42,
         "mySelect": "auto"
     },
-    "objects": []
+    "objects": [
+
+    ]
 }

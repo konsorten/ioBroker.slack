@@ -1,15 +1,15 @@
 {
-  "name": "ioBroker.slack",
+  "name": "iobroker.slack",
   "version": "0.6.0",
   "description": "ioBroker slack Adapter",
   "author": {
-    "name": "marvin + konsorten GmbH",
-    "email": "dev@konsorten.de"
+    "name": "Michael Müller",
+    "email": "mm@konsorten.de"
   },
   "contributors": [
     {
-      "name": "marvin + konsorten GmbH",
-      "email": "dev@konsorten.de"
+      "name": "Michael Müller",
+      "email": "mm@konsorten.de"
     }
   ],
   "homepage": "https://github.com/ioBroker/ioBroker.slack",
