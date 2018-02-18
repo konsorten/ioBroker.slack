@@ -1,10 +1,13 @@
 'use strict';
 
-var gulp      = require('gulp');
-var fs        = require('fs');
-var pkg       = require('./package.json');
+var gulp = require('gulp');
+var fs = require('fs');
+var pkg = require('./package.json');
 var iopackage = require('./io-package.json');
-var version   = (pkg && pkg.version) ? pkg.version : iopackage.common.version;
+var ts = require("gulp-typescript");
+var tsProject = ts.createProject("tsconfig.json");
+var header = require('gulp-header');
+var version = (pkg && pkg.version) ? pkg.version : iopackage.common.version;
 /*var appName   = getAppName();
 
 function getAppName() {
@@ -13,7 +16,7 @@ function getAppName() {
 }
 */
 const fileName = 'words.js';
-var languages =  {
+var languages = {
     en: {},
     de: {},
     ru: {},
@@ -82,9 +85,11 @@ function readWordJs(src) {
         return null;
     }
 }
+
 function padRight(text, totalLength) {
     return text + (text.length < totalLength ? new Array(totalLength - text.length).join(' ') : '');
 }
+
 function writeWordJs(data, src) {
     var text = '';
     text += '/*global systemDictionary:true */\n';
@@ -156,6 +161,7 @@ function words2languages(src) {
         console.error('Cannot read or parse ' + fileName);
     }
 }
+
 function words2languagesFlat(src) {
     var langs = Object.assign({}, languages);
     var data = readWordJs(src);
@@ -201,6 +207,7 @@ function words2languagesFlat(src) {
         console.error('Cannot read or parse ' + fileName);
     }
 }
+
 function languagesFlat2words(src) {
     var dirs = fs.readdirSync(src + 'i18n/');
     var langs = {};
@@ -269,6 +276,7 @@ function languagesFlat2words(src) {
 
     writeWordJs(bigOne, src);
 }
+
 function languages2words(src) {
     var dirs = fs.readdirSync(src + 'i18n/');
     var langs = {};
@@ -371,10 +379,10 @@ gulp.task('updatePackages', function (done) {
     done();
 });
 
-gulp.task('rename', function ()  {
+gulp.task('rename', function () {
     var newname;
     var author = '@@Author@@';
-    var email  = '@@email@@';
+    var email = '@@email@@';
     for (var a = 0; a < process.argv.length; a++) {
         if (process.argv[a] === '--name') {
             newname = process.argv[a + 1]
@@ -400,19 +408,18 @@ gulp.task('rename', function ()  {
         process.exit();
     }
     if (fs.existsSync(__dirname + '/admin/template.png')) {
-        fs.renameSync(__dirname + '/admin/template.png',              __dirname + '/admin/' + newname + '.png');
+        fs.renameSync(__dirname + '/admin/template.png', __dirname + '/admin/' + newname + '.png');
     }
     if (fs.existsSync(__dirname + '/widgets/template.html')) {
-        fs.renameSync(__dirname + '/widgets/template.html',           __dirname + '/widgets/' + newname + '.html');
+        fs.renameSync(__dirname + '/widgets/template.html', __dirname + '/widgets/' + newname + '.html');
     }
     if (fs.existsSync(__dirname + '/widgets/template/js/template.js')) {
         fs.renameSync(__dirname + '/widgets/template/js/template.js', __dirname + '/widgets/template/js/' + newname + '.js');
     }
     if (fs.existsSync(__dirname + '/widgets/template')) {
-        fs.renameSync(__dirname + '/widgets/template',                __dirname + '/widgets/' + newname);
+        fs.renameSync(__dirname + '/widgets/template', __dirname + '/widgets/' + newname);
     }
-    var patterns = [
-        {
+    var patterns = [{
             match: /template/g,
             replacement: newname
         },
@@ -436,11 +443,11 @@ gulp.task('rename', function ()  {
         __dirname + '/README.md',
         __dirname + '/main.js',
         __dirname + '/Gruntfile.js',
-        __dirname + '/widgets/' + newname +'.html',
+        __dirname + '/widgets/' + newname + '.html',
         __dirname + '/www/index.html',
         __dirname + '/admin/index.html',
         __dirname + '/admin/index_m.html',
-        __dirname + '/widgets/' + newname + '/js/' + newname +'.js',
+        __dirname + '/widgets/' + newname + '/js/' + newname + '.js',
         __dirname + '/widgets/' + newname + '/css/style.css'
     ];
     files.forEach(function (f) {
@@ -463,7 +470,7 @@ gulp.task('updateReadme', function (done) {
     var pos = readme.indexOf('## Changelog\n');
     if (pos !== -1) {
         var readmeStart = readme.substring(0, pos + '## Changelog\n'.length);
-        var readmeEnd   = readme.substring(pos + '## Changelog\n'.length);
+        var readmeEnd = readme.substring(pos + '## Changelog\n'.length);
 
         if (readme.indexOf(version) === -1) {
             var timestamp = new Date();
@@ -480,6 +487,63 @@ gulp.task('updateReadme', function (done) {
         }
     }
     done();
+});
+
+gulp.task("build", () => {
+
+    var pkg = require('./io-package.json');
+
+    let headerText = 
+`/* 
+ * ⚠️ !!! GENERATED FROM TYPESCRIPT !!! ⚠️
+ *
+ * ###########################################################
+ * ###########################################################
+ * ###########################################################
+ * ###########################################################
+ * ###########################################################
+ * ###########################################################
+ * ###########################################################
+ * ###########################################################
+ * ###########################################################
+ * #############                     #####/          .########
+ * ############(                     ####              /######
+ * ####################.     ###########      ####,   ########
+ * ####################.     ###########     /################
+ * ####################.     ###########       ###############
+ * ####################.     ############          /##########
+ * ####################.     ##############           .#######
+ * ####################.     #################,         (#####
+ * ####################.     #####################/      (####
+ * ####################.     #############.#########     .####
+ * ####################.     ##########      ######.     /####
+ * ####################.     ##########                 .#####
+ * ####################.     ############,             #######
+ * ##########################################(*.../###########
+ * ###########################################################
+ *
+ * This Javascript file was automatically compiled by the Typescript compiler. Please use the original Typescript file
+ * located at the "src" folder instead of editing this file directly
+ * 
+ */
+
+/*
+ * ${pkg.common.title} - ${pkg.common.desc.en}
+ * @version v${pkg.common.version}
+ * 
+ * Made with ❤️ by marvin + konsorten, a cheeky digital agency from Düsseldorf, Germany.
+ * Want to enjoy a 🚀 start of your Project? We are available for hire! Please visit our website at  https://konsorten.de
+ * or join us on GitHub: https://github.com/konsorten.
+ * 
+ */
+`;
+
+    var tsResult = tsProject.src() 
+        .pipe(tsProject());
+
+    return tsResult.js
+        .pipe(header(headerText))
+        .pipe(gulp.dest("./"));
 });
 
 gulp.task('default', ['updatePackages', 'updateReadme']);
