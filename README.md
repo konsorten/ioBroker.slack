@@ -21,6 +21,9 @@ also be able to process incoming messages.
 `sendTo("slack", { text: "your message", channel: "channelname });`
 
 ## Changelog
+### 0.2.0 (2018-02-24)
+* news
+
 ### 0.1.0 (2018-02-18)
 * Initial development release
 

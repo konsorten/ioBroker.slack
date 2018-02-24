@@ -1,7 +1,7 @@
 {
     "common": {
         "name": "slack",
-        "version": "0.1.0",
+        "version": "0.2.0",
         "title": "Slack",
         "desc": {
             "en": "This adapter acts as a Slack Bot and allows sending and receiving Slack messages from within ioBroker.",
@@ -30,6 +30,10 @@
         "type": "messaging",
         "blockly": true,
         "news": {
+            "0.2.0": {
+                "en": "Now using slack client library from Slack",
+                "de": "Benutze jetzt die von Slack herausgegebene Client Bibliothek"
+            },
             "0.1.0": {
                 "en": "Initial development release",
                 "de": "Erste Entwicklerversion"

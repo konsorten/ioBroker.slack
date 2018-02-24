@@ -1,6 +1,6 @@
 {
   "name": "iobroker.slack",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "ioBroker slack Adapter",
   "author": {
     "name": "marvin + konsorten GmbH",
