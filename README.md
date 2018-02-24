@@ -18,11 +18,12 @@ also be able to process incoming messages.
 
 ### Send a Message to a Custom Channel
 
-`sendTo("slack", { text: "your message", channel: "channelname });`
+`sendTo("slack", { text: "your message", channel: "#channelname });`
 
 ## Changelog
 ### 0.2.0 (2018-02-24)
-* news
+* Now using slack client library from Slack
+
 
 ### 0.1.0 (2018-02-18)
 * Initial development release
